@@ -1,16 +1,16 @@
-#include "rational.hpp"
 //Instructions at https://cs.harding.edu/gfoust/classes/comp3450/projects/rational
-include "rational.hpp"
+#include "rational.hpp"
+#include <stdexcept>
 
 Rational::Rational() {
 	_num = 0;
-	_den = 1
+	_den = 1;
 };
 
 Rational::Rational(int num, int den) {
 	if (den != 0) {
 		_num = num;
-		_den = den
+		_den = den;
 	}
 	else {
 		throw std::domain_error("Denominator cannot be 0");
