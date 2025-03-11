@@ -8,7 +8,13 @@ Rational::Rational() {
 };
 
 Rational::Rational(int num, int den) {
-	if (den != 0) {
+	if (num == 0) {
+		_num = num;
+		_den = 1;
+	}
+	
+	if (den != 0) {		//Need to add functionality that ensures only numerator holds negative sign
+		simplify(num, den);
 		_num = num;
 		_den = den;
 	}
