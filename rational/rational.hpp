@@ -7,10 +7,8 @@ public:
 
 	int _num, _den;
 
-	Rational Simplify(int num, int den);
-
 private:
-
-
+	void simplify(int& num, int& den);
+	const int findGCF(int num, int den);
 
 };
