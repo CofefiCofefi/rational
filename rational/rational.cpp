@@ -21,6 +21,14 @@ Rational::Rational(int num, int den) {
 	else {
 		throw std::domain_error("Denominator cannot be 0");
 	}
+}
+
+int Rational::num() {
+	return _num;
+};
+
+int Rational::den() {
+	return _den;
 };
 
 void Rational::simplify(int& num, int& den) {
