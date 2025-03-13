@@ -175,7 +175,7 @@ Rational& operator--(Rational& dst) {		//Prefix
 	return dst;
 };
 
-Rational operator++(Rational& dst, int) {
+Rational operator++(Rational& dst, int) {	//Postfix
 	Rational temp(dst.num(), dst.den());
 
 	dst.num(dst.num() + dst.den());
@@ -183,10 +183,60 @@ Rational operator++(Rational& dst, int) {
 	return temp;
 }
 
-Rational operator--(Rational& dst, int) {
+Rational operator--(Rational& dst, int) {	//Postfix
 	Rational temp(dst.num(), dst.den());
 
 	dst.num(dst.num() - dst.den());
 
 	return temp;
-}
+};
+
+bool operator==(Rational const& lhs, Rational const& rhs) {
+	if (lhs.num() == rhs.num() && lhs.den() == rhs.den()) {
+		return true;
+	}
+	return false;
+};
+
+bool operator!=(Rational const& lhs, Rational const& rhs) {
+	if (lhs.num() != rhs.num() || lhs.den() != rhs.den()) {
+		return true;
+	}
+	return false;
+};
+
+bool operator<(Rational const& lhs, Rational const& rhs) {
+	int lcm = findLCM(lhs.den(), rhs.den());
+
+	if ((lhs.num() * (lcm / lhs.den())) < (rhs.num() * (lcm / rhs.den()))) {
+		return true;
+	}
+	return false;
+};
+
+bool operator>=(Rational const& lhs, Rational const& rhs) {
+	int lcm = findLCM(lhs.den(), rhs.den());
+
+	if ((lhs.num() * (lcm / lhs.den())) >= (rhs.num() * (lcm / rhs.den()))) {
+		return true;
+	}
+	return false;
+};
+
+bool operator>(Rational const& lhs, Rational const& rhs) {
+	int lcm = findLCM(lhs.den(), rhs.den());
+
+	if ((lhs.num() * (lcm / lhs.den())) > (rhs.num() * (lcm / rhs.den()))) {
+		return true;
+	}
+	return false;
+};
+
+bool operator<=(Rational const& lhs, Rational const& rhs) {
+	int lcm = findLCM(lhs.den(), rhs.den());
+
+	if ((lhs.num() * (lcm / lhs.den())) <= (rhs.num() * (lcm / rhs.den()))) {
+		return true;
+	}
+	return false;
+};

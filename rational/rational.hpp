@@ -30,3 +30,9 @@ Rational& operator ++(Rational& dst);		// prefix
 Rational& operator --(Rational& dst);		// prefix
 Rational operator ++(Rational& dst, int);	// postfix
 Rational operator --(Rational& dst, int);	// postfix
+bool operator ==(Rational const& lhs, Rational const& rhs);
+bool operator !=(Rational const& lhs, Rational const& rhs);
+bool operator < (Rational const& lhs, Rational const& rhs);
+bool operator >=(Rational const& lhs, Rational const& rhs);
+bool operator > (Rational const& lhs, Rational const& rhs);
+bool operator <=(Rational const& lhs, Rational const& rhs);

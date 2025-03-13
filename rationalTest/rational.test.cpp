@@ -280,3 +280,134 @@ TEST(MathAssignOps, PostMinusMinus) {
 	EXPECT_EQ(test1.den(), 12);
 };
 
+TEST(CompareOp, EqualEqual) {
+	Rational test1{ 1, 2 };
+	Rational test2{ 2, 5 };
+
+	EXPECT_EQ(test1 == test2, false);
+
+	Rational test3{ 1, 2 };
+	Rational test4{ 1, 2 };
+
+	EXPECT_EQ(test3 == test4, true);
+};
+
+TEST(CompareOp, NotEqual) {
+	Rational test1{ 1, 2 };
+	Rational test2{ 2, 5 };
+
+	EXPECT_EQ(test1 != test2, true);
+
+	Rational test3{ 1, 2 };
+	Rational test4{ 1, 2 };
+
+	EXPECT_EQ(test3 != test4, false);
+};
+
+TEST(CompareOp, LessThan) {
+	Rational test1{ 1, 2 };
+	Rational test2{ 2, 5 };
+
+	EXPECT_EQ(test1 < test2, false);
+
+	Rational test3{ 1, 2 };
+	Rational test4{ 1, 2 };
+
+	EXPECT_EQ(test3 < test4, false);
+
+	Rational test5{ 3, 8 };
+	Rational test6{ 5, 12 };
+
+	EXPECT_EQ(test5 < test6, true);
+
+	Rational test7{ 3, 8 };
+	Rational test8{ 5, -12 };
+
+	EXPECT_EQ(test7 < test8, false);
+
+	Rational test9{ 3, 8 };
+	Rational test10{ 0, 12 };
+
+	EXPECT_EQ(test9 < test10, false);
+};
+
+TEST(CompareOp, GreaterThanOrEqualTo) {
+	Rational test1{ 1, 2 };
+	Rational test2{ 2, 5 };
+
+	EXPECT_EQ(test1 >= test2, true);
+
+	Rational test3{ 1, 2 };
+	Rational test4{ 1, 2 };
+
+	EXPECT_EQ(test3 >= test4, true);
+
+	Rational test5{ 3, 8 };
+	Rational test6{ 5, 12 };
+
+	EXPECT_EQ(test5 >= test6, false);
+
+	Rational test7{ 3, 8 };
+	Rational test8{ 5, -12 };
+
+	EXPECT_EQ(test7 >= test8, true);
+
+	Rational test9{ 3, 8 };
+	Rational test10{ 0, 12 };
+
+	EXPECT_EQ(test9 >= test10, true);
+};
+
+TEST(CompareOp, GreaterThan) {
+	Rational test1{ 1, 2 };
+	Rational test2{ 2, 5 };
+
+	EXPECT_EQ(test1 > test2, true);
+
+	Rational test3{ 1, 2 };
+	Rational test4{ 1, 2 };
+
+	EXPECT_EQ(test3 > test4, false);
+
+	Rational test5{ 3, 8 };
+	Rational test6{ 5, 12 };
+
+	EXPECT_EQ(test5 > test6, false);
+
+	Rational test7{ 3, 8 };
+	Rational test8{ 5, -12 };
+
+	EXPECT_EQ(test7 > test8, true);
+
+	Rational test9{ 3, 8 };
+	Rational test10{ 0, 12 };
+
+	EXPECT_EQ(test9 > test10, true);
+};
+
+TEST(CompareOp, LessThanOrEqualTo) {
+	Rational test1{ 1, 2 };
+	Rational test2{ 2, 5 };
+
+	EXPECT_EQ(test1 <= test2, false);
+
+	Rational test3{ 1, 2 };
+	Rational test4{ 1, 2 };
+
+	EXPECT_EQ(test3 <= test4, true);
+
+	Rational test5{ 3, 8 };
+	Rational test6{ 5, 12 };
+
+	EXPECT_EQ(test5 <= test6, true);
+
+	Rational test7{ 3, 8 };
+	Rational test8{ 5, -12 };
+
+	EXPECT_EQ(test7 <= test8, false);
+
+	Rational test9{ 3, 8 };
+	Rational test10{ 0, 12 };
+
+	EXPECT_EQ(test9 <= test10, false);
+};
