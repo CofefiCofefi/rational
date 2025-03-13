@@ -130,9 +130,63 @@ Rational operator*(Rational const& lhs, Rational const& rhs) {
 };
 
 Rational operator/(Rational const& lhs, Rational const& rhs) {
-	return Rational();
+	if (rhs.num() != 0) {
+		Rational sum;
+		sum.num(lhs.num() * rhs.den());
+		sum.den(lhs.den() * rhs.num());
+		return sum;
+	}
+	else {
+		throw std::domain_error("Operation would result in dividing by 0 which is not allowed");
+	}
 };
 
 Rational operator-(Rational const& a) {
-	return Rational();
+	return Rational(-a.num(), a.den());
 };
+
+Rational& operator+=(Rational& dst, Rational const& src) {
+	dst = dst + src;
+	return dst;
+};
+
+Rational& operator-=(Rational& dst, Rational const& src) {
+	dst = dst - src;
+	return dst;
+};
+
+Rational& operator*=(Rational& dst, Rational const& src) {
+	dst = dst * src;
+	return dst;
+};
+
+Rational& operator/=(Rational& dst, Rational const& src) {
+	dst = dst / src;
+	return dst;
+};
+
+Rational& operator++(Rational& dst) {		//Prefix
+	dst.num(dst.num() + dst.den());
+	return dst;
+};
+
+Rational& operator--(Rational& dst) {		//Prefix
+	dst.num(dst.num() - dst.den());
+	return dst;
+};
+
+Rational operator++(Rational& dst, int) {
+	Rational temp(dst.num(), dst.den());
+
+	dst.num(dst.num() + dst.den());
+
+	return temp;
+}
+
+Rational operator--(Rational& dst, int) {
+	Rational temp(dst.num(), dst.den());
+
+	dst.num(dst.num() - dst.den());
+
+	return temp;
+}

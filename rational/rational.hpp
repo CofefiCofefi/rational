@@ -21,5 +21,12 @@ Rational operator +(Rational const& lhs, Rational const& rhs);
 Rational operator -(Rational const& lhs, Rational const& rhs);
 Rational operator *(Rational const& lhs, Rational const& rhs);
 Rational operator /(Rational const& lhs, Rational const& rhs);
-
-Rational operator -(Rational const& a); //Unary 
+Rational operator -(Rational const& a);
+Rational& operator +=(Rational& dst, Rational const& src);
+Rational& operator -=(Rational& dst, Rational const& src);
+Rational& operator *=(Rational& dst, Rational const& src);
+Rational& operator /=(Rational& dst, Rational const& src);
+Rational& operator ++(Rational& dst);		// prefix
+Rational& operator --(Rational& dst);		// prefix
+Rational operator ++(Rational& dst, int);	// postfix
+Rational operator --(Rational& dst, int);	// postfix

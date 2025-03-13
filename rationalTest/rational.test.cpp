@@ -95,7 +95,7 @@ TEST(Setters, Den) {
 		EXPECT_EQ(test5.num(), 1);
 		EXPECT_EQ(test5.den(), 2);
 	}
-}
+};
 
 TEST(MathOps, Plus) {
 	Rational test1{ 3, 4 };
@@ -115,7 +115,7 @@ TEST(MathOps, Plus) {
 
 	EXPECT_EQ(test6.num(), 5);
 	EXPECT_EQ(test6.den(), 24);
-}
+};
 
 TEST(MathOps, Minus) {
 	Rational test1{ 5, 6 };
@@ -144,7 +144,7 @@ TEST(MathOps, Minus) {
 
 	EXPECT_EQ(test9.num(), -1);
 	EXPECT_EQ(test9.den(), 12);
-}
+};
 
 TEST(MathOps, Multiply) {
 	Rational test1{ 3, 4 };
@@ -155,18 +155,128 @@ TEST(MathOps, Multiply) {
 
 	EXPECT_EQ(test3.num(), 5);
 	EXPECT_EQ(test3.den(), 8);
-}
-//
-//TEST(MathOps, Divide) {
-//	Rational test;
-//	test.den(300);
-//	EXPECT_EQ(test.num(), 0);
-//	EXPECT_EQ(test.den(), 1);
-//}
-//
-//TEST(MathOps, UnaryMinus) {
-//	Rational test;
-//	test.den(300);
-//	EXPECT_EQ(test.num(), 0);
-//	EXPECT_EQ(test.den(), 1);
-//}
+};
+
+TEST(MathOps, Divide) {
+	Rational test1{ 3, 8 };
+	Rational test2{ 4, 9 };
+	Rational test3;
+
+	test3 = test1 / test2;
+
+	EXPECT_EQ(test3.num(), 27);
+	EXPECT_EQ(test3.den(), 32);
+
+	try {
+		Rational test4{ 3, 8 };
+		Rational test5{ 0, 9 };
+		Rational test6;
+
+		test6 = test4 / test5;
+	}
+	catch (std::domain_error) {}
+};
+
+TEST(MathOps, UnaryMinus) {
+	Rational test1{ 3, 4 };
+	Rational test2;
+
+	test2 = -test1;
+
+	EXPECT_EQ(test2.num(), -3);
+	EXPECT_EQ(test2.den(), 4);
+
+	test2 = -test2;
+	EXPECT_EQ(test2.num(), 3);
+	EXPECT_EQ(test2.den(), 4);
+};
+
+TEST(MathAssignOps, PlusEqual) {
+	Rational test1{ 1, 4 };
+	Rational test2{ 1, 3 };
+
+	test1 += test2;
+
+	EXPECT_EQ(test1.num(), 7);
+	EXPECT_EQ(test1.den(), 12);
+};
+
+TEST(MathAssignOps, MultiplyEqual) {
+	Rational test1{ 3, 4 };
+	Rational test2{ 1, 3 };
+
+	test1 *= test2;
+
+	EXPECT_EQ(test1.num(), 1);
+	EXPECT_EQ(test1.den(), 4);
+};
+
+TEST(MathAssignOps, MinusEqual) {
+	Rational test1{ 3, 4 };
+	Rational test2{ 1, 3 };
+
+	test1 -= test2;
+
+	EXPECT_EQ(test1.num(), 5);
+	EXPECT_EQ(test1.den(), 12);
+};
+
+TEST(MathAssignOps, DivideEqual) {
+	Rational test1{ 3, 4 };
+	Rational test2{ 1, 3 };
+
+	test1 /= test2;
+
+	EXPECT_EQ(test1.num(), 9);
+	EXPECT_EQ(test1.den(), 4);
+
+	try {
+		Rational test4{ 3, 8 };
+		Rational test5{ 0, 9 };
+		test4 /= test5;
+	}
+	catch (std::domain_error) {}
+};
+
+TEST(MathAssignOps, PrePlusPlus) {
+	Rational test1{ 7, 12 };
+
+	++test1;
+
+	EXPECT_EQ(test1.num(), 19);
+	EXPECT_EQ(test1.den(), 12);
+};
+
+TEST(MathAssignOps, PreMinusMinus) {
+	Rational test1{ 19, 12 };
+
+	--test1;
+
+	EXPECT_EQ(test1.num(), 7);
+	EXPECT_EQ(test1.den(), 12);
+};
+
+TEST(MathAssignOps, PostPlusPlus) {
+	Rational test1{ 7, 12 };
+
+	Rational result = test1++;
+
+	EXPECT_EQ(result.num(), 7);
+	EXPECT_EQ(result.den(), 12);
+
+	EXPECT_EQ(test1.num(), 19);
+	EXPECT_EQ(test1.den(), 12);
+};
+
+TEST(MathAssignOps, PostMinusMinus) {
+	Rational test1{ 19, 12 };
+
+	Rational result = test1--;
+
+	EXPECT_EQ(result.num(), 19);
+	EXPECT_EQ(result.den(), 12);
+
+	EXPECT_EQ(test1.num(), 7);
+	EXPECT_EQ(test1.den(), 12);
+};
+
