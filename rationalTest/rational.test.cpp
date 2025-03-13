@@ -28,7 +28,7 @@ TEST(ValueCtor, CorrectlyHandelsNegatives) {
 	EXPECT_EQ(test3.num(), -46);
 	EXPECT_EQ(test3.den(), 33);
 
-	Rational test4(1, -2);
+	Rational test4(-1, 2);
 	EXPECT_EQ(test4.num(), -1);
 	EXPECT_EQ(test4.den(), 2);
 
@@ -116,14 +116,36 @@ TEST(MathOps, Plus) {
 	EXPECT_EQ(test6.num(), 5);
 	EXPECT_EQ(test6.den(), 24);
 }
-//
-//TEST(MathOps, Minus) {
-//	Rational test;
-//	test.den(300);
-//	EXPECT_EQ(test.num(), 0);
-//	EXPECT_EQ(test.den(), 1);
-//}
-//
+
+TEST(MathOps, Minus) {
+	Rational test1{ 5, 6 };
+	Rational test2{ 1, 9 };
+	Rational test3;
+
+	test3 = test1 - test2;
+
+	EXPECT_EQ(test3.num(), 13);
+	EXPECT_EQ(test3.den(), 18);
+
+	const Rational test4{ -1, 6 };
+	const Rational test5{ 3, 8 };
+	Rational test6;
+
+	test6 = test4 - test5;
+
+	EXPECT_EQ(test6.num(), -13);
+	EXPECT_EQ(test6.den(), 24);
+
+	Rational test7{ 3, 4 };
+	Rational test8{ 5, 6 };
+	Rational test9;
+
+	test9 = test7 - test8;
+
+	EXPECT_EQ(test9.num(), -1);
+	EXPECT_EQ(test9.den(), 12);
+}
+
 TEST(MathOps, Multiply) {
 	Rational test1{ 3, 4 };
 	Rational test2{ 5, 6 };

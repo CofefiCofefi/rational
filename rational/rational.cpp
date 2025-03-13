@@ -110,13 +110,16 @@ Rational operator+(const Rational& lhs, const Rational& rhs) {
 	int newNum = (lhs.num() * (lcm / lhs.den()))+(rhs.num() * (lcm / rhs.den()));
 	int newDen = lcm;
 
-	Rational sum(newNum, newDen);
-
-	return sum;
+	return Rational(newNum, newDen);
 };
 
 Rational operator-(Rational const& lhs, Rational const& rhs) {
-	return Rational();
+	int lcm = findLCM(lhs.den(), rhs.den());
+
+	int newNum = (lhs.num() * (lcm / lhs.den()))-(rhs.num() * (lcm / rhs.den()));
+	int newDen = lcm;
+
+	return Rational(newNum, newDen);
 };
 
 Rational operator*(Rational const& lhs, Rational const& rhs) {
