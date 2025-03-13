@@ -17,7 +17,7 @@ TEST(ValueCtor, CorrectlySimplifies) {
 
 TEST(ValueCtor, CorrectlyHandelsNegatives) {
 	Rational test(-4, -8);
-	EXPECT_EQ(test.num(), -1);
+	EXPECT_EQ(test.num(), 1);
 	EXPECT_EQ(test.den(), 2);
 
 	Rational test2(65, -75);
@@ -31,6 +31,10 @@ TEST(ValueCtor, CorrectlyHandelsNegatives) {
 	Rational test4(1, -2);
 	EXPECT_EQ(test4.num(), -1);
 	EXPECT_EQ(test4.den(), 2);
+
+	Rational test5(-5, 24);
+	EXPECT_EQ(test5.num(), -5);
+	EXPECT_EQ(test5.den(), 24);
 }
 
 TEST(DefaultCtor, CorrectlyInitlizes) {
@@ -92,3 +96,55 @@ TEST(Setters, Den) {
 		EXPECT_EQ(test5.den(), 2);
 	}
 }
+
+TEST(MathOps, Plus) {
+	Rational test1{ 3, 4 };
+	Rational test2{ 5, 6 };
+	Rational test3;
+
+	test3 = test1 + test2;
+
+	EXPECT_EQ(test3.num(), 19);
+	EXPECT_EQ(test3.den(), 12);
+
+	const Rational test4{ -1, 6 };
+	const Rational test5{ 3, 8 };
+	Rational test6;
+
+	test6 = test4 + test5;
+
+	EXPECT_EQ(test6.num(), 5);
+	EXPECT_EQ(test6.den(), 24);
+}
+//
+//TEST(MathOps, Minus) {
+//	Rational test;
+//	test.den(300);
+//	EXPECT_EQ(test.num(), 0);
+//	EXPECT_EQ(test.den(), 1);
+//}
+//
+TEST(MathOps, Multiply) {
+	Rational test1{ 3, 4 };
+	Rational test2{ 5, 6 };
+	Rational test3;
+
+	test3 = test1 * test2;
+
+	EXPECT_EQ(test3.num(), 5);
+	EXPECT_EQ(test3.den(), 8);
+}
+//
+//TEST(MathOps, Divide) {
+//	Rational test;
+//	test.den(300);
+//	EXPECT_EQ(test.num(), 0);
+//	EXPECT_EQ(test.den(), 1);
+//}
+//
+//TEST(MathOps, UnaryMinus) {
+//	Rational test;
+//	test.den(300);
+//	EXPECT_EQ(test.num(), 0);
+//	EXPECT_EQ(test.den(), 1);
+//}
