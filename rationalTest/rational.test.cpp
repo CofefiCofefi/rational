@@ -411,3 +411,103 @@ TEST(CompareOp, LessThanOrEqualTo) {
 
 	EXPECT_EQ(test9 <= test10, false);
 };
+
+TEST(ConvertOps, ImplicitFromInt) {
+	Rational test1 = 5;
+
+	EXPECT_EQ(test1.num(), 5);
+	EXPECT_EQ(test1.den(), 1);
+
+	Rational test2 = -5;
+
+	EXPECT_EQ(test2.num(), -5);
+	EXPECT_EQ(test2.den(), 1);
+};
+
+TEST(ConvertOps, ImplicitFromDouble) {
+	Rational test1 = 5.0;
+
+	EXPECT_EQ(test1.num(), 5.0);
+	EXPECT_EQ(test1.den(), 1.0);
+
+	Rational test2 = -5.0;
+
+	EXPECT_EQ(test2.num(), -5.0);
+	EXPECT_EQ(test2.den(), 1.0);
+
+	Rational test3 = .125;
+
+	EXPECT_EQ(test3.num(), 1);
+	EXPECT_EQ(test3.den(), 8);
+};
+
+TEST(ConvertOps, ExplicitToInt) {
+	Rational test1{ 7, 2 };
+	int x = (double)test1;
+	EXPECT_EQ(x, 3);
+
+	Rational test2{ -5, 3 };
+	int y = (double)test2;
+	EXPECT_EQ(y, -1);
+
+	Rational test3{ 10, 10 };
+	int z = (double)test3;
+	EXPECT_EQ(z, 1);
+}
+
+TEST(ConvertOps, ExplicitToDouble) {
+	Rational test1{ 7, 2 };
+	double x = (double)test1;
+	EXPECT_DOUBLE_EQ(x, 3.5);
+
+	Rational test2{ -5, 4 };
+	double y = (double)test2;
+	EXPECT_DOUBLE_EQ(y, -1.25);
+
+	Rational test3{ 10, 10 };
+	double z = (double)test3;
+	EXPECT_DOUBLE_EQ(z, 1.0);
+}
+
+TEST(IoOps, In) {
+	std::istringstream input1("3/4");
+	Rational test1;
+	input1 >> test1;
+
+	EXPECT_EQ(test1.num(), 3);
+	EXPECT_EQ(test1.den(), 4);
+
+	std::istringstream input2("-3/4");
+	Rational test2;
+	input2 >> test2;
+
+	EXPECT_EQ(test2.num(), -3);
+	EXPECT_EQ(test2.den(), 4);
+
+	std::istringstream input3("3/-4");
+	Rational test3;
+	input3 >> test3;
+
+	EXPECT_EQ(test3.num(), -3);
+	EXPECT_EQ(test3.den(), 4);
+
+	std::istringstream input4("3/0");
+	Rational test4;
+	input4 >> test4;
+
+	EXPECT_TRUE(input4.fail());
+}
+
+TEST(IoOps, Out) {
+	Rational test1(3, 4);
+	std::ostringstream output1;
+	output1 << test1;
+
+	EXPECT_EQ(output1.str(), "3/4");
+
+	Rational test2(-3, 4);
+	std::ostringstream output2;
+	output2 << test2;
+
+	EXPECT_EQ(output2.str(), "-3/4");
+}

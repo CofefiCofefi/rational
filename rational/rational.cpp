@@ -1,7 +1,7 @@
 //Instructions at https://cs.harding.edu/gfoust/classes/comp3450/projects/rational
 #include "rational.hpp"
-#include <stdexcept>
-#include <algorithm>
+
+int Rational::doubleBase = 1000000;
 
 Rational::Rational() {
 	_num = 0;
@@ -29,7 +29,28 @@ Rational::Rational(int num, int den) {
 			_den = den;
 		}
 	}
-}
+};
+
+Rational::Rational(int other) {
+	_num = other;
+	_den = 1;
+
+	simplify(_num, _den);
+};
+
+Rational::Rational(double other) {
+	_num = other * doubleBase;
+	_den = doubleBase;
+	simplify(_num, _den);
+};
+
+Rational::operator int() const {
+	return _num / _den;
+};
+
+Rational::operator double() const {
+	return static_cast<double>(_num) / _den;
+};
 
 int Rational::num() const {
 	return _num;
@@ -74,6 +95,40 @@ void Rational::den(int den) {
 		_num = num;
 		_den = den;
 	};
+};
+
+std::istream& operator>>(std::istream& in, Rational& rat) {
+	int num, den;
+	char slash;
+
+	if (!(in >> num)) {
+		in.setstate(ios::failbit);
+		return in;
+	}
+
+	if (!(in >> slash) || slash != '/') {
+		in.setstate(ios::failbit);
+		return in;
+	}
+
+	if (!(in >> den)) {
+		in.setstate(ios::failbit);
+		return in;
+	}
+
+	if (den == 0) {
+		in.setstate(ios::failbit);
+		return in;
+	}
+
+	rat = Rational(num, den);
+
+	return in;
+};
+
+std::ostream& operator<<(std::ostream& out, Rational const& rat) {
+	out << rat.num() << '/' << rat.den();
+	return out;
 };
 
 void Rational::simplify(int& num, int& den) {
